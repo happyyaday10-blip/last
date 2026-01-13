@@ -1,0 +1,389 @@
+!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Aishwarya 🤍</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{
+  font-family:'Segoe UI',sans-serif;
+  background:#efe6dc;
+  overflow:hidden;
+}
+
+/* ENTRY */
+#enter{
+  position:fixed; inset:0;
+  background:#efe6dc;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  z-index:50;
+}
+#enter button{
+  padding:16px 40px;
+  border-radius:40px;
+  border:none;
+  background:#111;
+  color:white;
+  font-size:18px;
+}
+
+/* SLIDER */
+.slider{
+  display:flex;
+  width:500vw;
+  height:100vh;
+  transition:transform 1.3s cubic-bezier(.77,0,.18,1);
+}
+.page{
+  width:100vw;
+  height:100vh;
+  padding:30px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:30px;
+  position:relative;
+}
+
+/* POLAROID */
+.polaroid{
+  background:white;
+  padding:14px;
+  width:200px;
+  box-shadow:0 20px 50px rgba(0,0,0,.18);
+  animation:fadeUp 1.4s ease forwards;
+}
+.photo{
+  height:200px;
+}
+.photo img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+.name,.note{text-align:center;margin-top:10px;font-weight:500;}
+
+/* LETTER */
+.letter{
+  max-width:700px;
+  font-size:15px;
+  line-height:1.7;
+  animation:fadeUp 1.2s ease;
+  position:relative;
+}
+
+/* NEXT BUTTON */
+.next-btn{
+  position:absolute;
+  bottom:20px;
+  padding:12px 28px;
+  border:none;
+  border-radius:25px;
+  background:#ff3c78;
+  color:white;
+  font-size:16px;
+  cursor:pointer;
+  box-shadow:0 5px 15px rgba(0,0,0,.2);
+  transition:transform .2s;
+}
+.next-btn:hover{transform:scale(1.05);}
+
+/* SONGS */
+.songs{gap:22px;justify-content:center;}
+.song{
+  background:white;
+  width:130px;
+  height:180px;
+  border-radius:22px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  box-shadow:0 15px 40px rgba(0,0,0,.15);
+}
+.song img{
+  width:60px;
+  height:60px;
+  object-fit:contain;
+}
+.song button{
+  margin-top:12px;
+  width:52px;
+  height:52px;
+  border-radius:50%;
+  border:none;
+  background:#111;
+  color:white;
+  font-size:18px;
+}
+
+/* STICKERS WITH FLIP */
+.flip-card-container{
+  perspective:1000px;
+}
+.flip-card{
+  width:180px;
+  height:220px;
+  position:relative;
+  transform-style:preserve-3d;
+  transition:transform 0.8s;
+  cursor:pointer;
+}
+.flip-card.flipped{transform:rotateY(180deg);}
+.flip-card-front,.flip-card-back{
+  position:absolute;
+  width:100%;
+  height:100%;
+  backface-visibility:hidden;
+  border-radius:20px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  box-shadow:0 15px 40px rgba(0,0,0,.2);
+}
+.flip-card-front{background:white;}
+.flip-card-front img{
+  width:120px;
+  height:120px;
+  object-fit:contain;
+}
+.flip-card-front p{
+  margin-top:15px;
+  font-size:14px;
+  color:#555;
+  text-align:center;
+  padding:0 10px;
+}
+.flip-card-back{
+  background:linear-gradient(135deg,#fff5f5,#ffe0e0);
+  transform:rotateY(180deg);
+  padding:20px;
+  text-align:center;
+}
+.flip-card-back p{
+  font-size:16px;
+  color:#333;
+  line-height:1.5;
+  font-weight:500;
+}
+.top{position:absolute;top:40px;right:40px;}
+.bottom{position:absolute;bottom:40px;left:40px;}
+
+/* HUG */
+.hug{flex-direction:column;}
+.hug-btn{
+  padding:22px 44px;
+  border-radius:50px;
+  background:pink;
+  border:none;
+  font-size:20px;
+}
+#hugText{
+  margin-top:20px;
+  font-size:22px;
+  text-align:center;
+}
+
+/* HEARTS */
+.heart{
+  position:fixed;
+  bottom:-20px;
+  font-size:22px;
+  animation:rise 4s linear forwards;
+  pointer-events:none;
+}
+@keyframes rise{
+  to{transform:translateY(-120vh) scale(1.4);opacity:0;}
+}
+
+/* ROSE PETALS */
+.petal{
+  position:fixed;
+  top:-10vh;
+  width:30px;
+  opacity:0.8;
+  animation:fall linear forwards;
+  pointer-events:none;
+}
+@keyframes fall{
+  to{transform:translateY(120vh) rotate(360deg);opacity:0;}
+}
+
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(30px);}
+  to{opacity:1;transform:translateY(0);}
+}
+
+/* MOBILE RESPONSIVE */
+@media (max-width: 768px) {
+  .petal {
+    width: 20px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- BGM -->
+<audio id="bgm" loop src="love.m4a"></audio>
+
+<div id="enter">
+  <button onclick="startLove()">Tap to enter 💗</button>
+</div>
+
+<div class="slider" id="slider">
+
+<!-- PAGE 1 -->
+<section class="page">
+  <div class="polaroid">
+    <div class="photo"><img src="aish1.jpeg"></div>
+    <p class="name">Aishwarya Yadav 🫣</p>
+  </div>
+  <div class="polaroid">
+    <div class="photo"><img src="aish2.jpeg"></div>
+    <p class="note">For you? Always and in all ways</p>
+  </div>
+  <button class="next-btn" onclick="nextPage()">Tap to see next 💖</button>
+</section>
+
+<!-- PAGE 2 -->
+<section class="page">
+<div class="letter">
+<b>Aishwarya… (my everything)</b><br><br>
+I know shayad apne already sb dekh liya hoga 🙃<br>
+Only all I say ki I love you fr Sach m kaafi zyada yrr😭<br><br>
+Aur aap meri laadoo ho hamesha rhogi kasam se👉🏻👈🏻🙃<br><br>
+Pta h hum thode alag phase m aagye h, baatein bhi kam hogyi h<br>
+par honestly mujhe bas wahi pehle wali feeling miss hoti h😭<br><br>
+Woh bina soche baat krna, woh comfort, woh apnapan🫠<br><br>
+M bas dil se hope krta hu ki hum fir se thode wps normal ho jaaye…<br>
+jese phle the<br><br>
+M yahin hu fr humesha apke pass😭🙌🏻<br>
+Jab bhi aap ready ho!!🫠👉🏻👈🏻<br><br>
+<b>Waiting!!...</b>
+</div>
+<button class="next-btn" onclick="nextPage()">Tap to see next 💖</button>
+</section>
+
+<!-- PAGE 3 -->
+<section class="page songs">
+  <div class="song">
+    <img src="flower.jfif">
+    <button onclick="playSong('admrin.m4a')">▶</button>
+  </div>
+  <div class="song">
+    <img src="haha.jfif">
+    <button onclick="playSong('dilkahaal.m4a')">▶</button>
+  </div>
+  <div class="song">
+    <img src="hug.jfif">
+    <button onclick="playSong('romeo.m4a')">▶</button>
+  </div>
+  <button class="next-btn" onclick="nextPage()">Tap to see next 💖</button>
+</section>
+
+<!-- PAGE 4 -->
+<section class="page">
+  <div class="flip-card-container top">
+    <div class="flip-card" onclick="this.classList.toggle('flipped')">
+      <div class="flip-card-front">
+        <img src="stress.jfif">
+        <p>do you have any stress then click it</p>
+      </div>
+      <div class="flip-card-back">
+        <p>stress kis baat ka h mai hu na? 😊</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="flip-card-container bottom">
+    <div class="flip-card" onclick="this.classList.toggle('flipped')">
+      <div class="flip-card-front">
+        <img src="problem.jfif">
+        <p>if you have any problem then click it</p>
+      </div>
+      <div class="flip-card-back">
+        <p>jb mai hu toh problem kaisi? 🥰</p>
+      </div>
+    </div>
+  </div>
+  <button class="next-btn" onclick="nextPage()">Tap to see next 💖</button>
+</section>
+
+<!-- PAGE 5 -->
+<section class="page hug">
+  <button class="hug-btn" onclick="hug()">🤍 Virtual Hug</button>
+  <div id="hugText"></div>
+</section>
+
+</div>
+
+<audio id="songPlayer"></audio>
+
+<script>
+let page=0;
+const slider=document.getElementById('slider');
+const bgm=document.getElementById('bgm');
+const songPlayer=document.getElementById('songPlayer');
+
+function startLove(){
+  document.getElementById('enter').style.display='none';
+  bgm.play();
+  setInterval(createPetal,350);
+}
+
+// Move to next page
+function nextPage(){
+  page++;
+  slider.style.transform = `translateX(-${page*100}vw)`;
+
+  // PAGE 3 (songs) => stop bgm
+  if(page === 2){
+    bgm.pause();
+  }
+
+  // After songs page (page 4 & 5) => resume bgm
+  if(page > 2){
+    bgm.play();
+  }
+}
+
+function playSong(src){
+  songPlayer.src=src;
+  songPlayer.play();
+}
+
+function hug(){
+  document.getElementById('hugText').innerHTML=
+  "Yours always nd forever! 💕💋💖";
+  for(let i=0;i<25;i++)createHeart();
+}
+
+function createHeart(){
+  const h=document.createElement('div');
+  h.className='heart';
+  h.innerHTML=Math.random()>0.5?'💖':'💋';
+  h.style.left=Math.random()*100+'vw';
+  document.body.appendChild(h);
+  setTimeout(()=>h.remove(),5000);
+}
+
+function createPetal(){
+  const p=document.createElement('img');
+  p.src='rose.jpg';
+  p.className='petal';
+  p.style.left=Math.random()*100+'vw';
+  p.style.animationDuration=6+Math.random()*4+'s';
+  document.body.appendChild(p);
+  setTimeout(()=>p.remove(),10000);
+}
+</script>
+
+</body>
+</html>
